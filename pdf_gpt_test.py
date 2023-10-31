@@ -24,29 +24,25 @@ output.save("Output.md")
 with open("Output.md", "r", encoding="utf-8") as file:
     markdown_text = file.read()
 
-    start_index = markdown_text.find("!Evaluation Only")
-    end_index = markdown_text.rfind("https://products.aspose.com/words/")
+    markdown_text = re.sub(r'!\[.*\]\(.*\)', '', markdown_text)
 
-    if start_index != -1 and end_index != -1:
-    # Remove the watermark
-        markdown_text = markdown_text[:start_index] + markdown_text[end_index + len("https://products.aspose.com/words/"):]
+    watermark_text_start = r"\*\*Evaluation Only\. Created with Aspose\.Words\. Copyright 2003-2023 Aspose Pty Ltd\.\*\*"
+    markdown_text = re.sub(watermark_text_start, '', markdown_text)
 
-    print(markdown_text)
+    watermark_text_end = r"\*\*Created with an evaluation copy of Aspose\.Words\. To discover the full versions of our APIs please visit: https://products\.aspose\.com/words/\*\*"
+    markdown_text = re.sub(watermark_text_end, '', markdown_text)
+    #print(markdown_text)
 
-# with open("Output.md", "r") as file:
-#     markdown_text = file.read()
-#     html_text = markdown.markdown(markdown_text)
+openai.api_key = "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"
 
-# openai.api_key = "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"
+prompt = "Can you make a markdown format lesson focusing only about Creational Patterns based on this source: " + markdown_text
 
-# prompt = "Can you copy this: " + text
+completion = openai.ChatCompletion.create(
+  model="gpt-3.5-turbo",
+  messages=[
+    {"role": "system", "content": "You are a college teacher."},
+    {"role": "user", "content": prompt}
+  ]
+)
 
-# completion = openai.ChatCompletion.create(
-#   model="gpt-3.5-turbo",
-#   messages=[
-#     {"role": "system", "content": "You are a computer science teacher."},
-#     {"role": "user", "content": prompt}
-#   ]
-# )
-
-# print(completion.choices[0].message)
+print(completion['choices'][0]['message']['content'])
