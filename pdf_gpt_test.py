@@ -2,6 +2,8 @@ import pdfplumber
 import aspose.words as aw
 import openai
 import re
+from dotenv import load_dotenv
+import os
 
 with pdfplumber.open('Design patterns Midterm Notes.pdf') as pdf:
     # iterate over each page
@@ -32,7 +34,9 @@ with open("Output.md", "r", encoding="utf-8") as file:
     markdown_text = re.sub(watermark_text_end, '', markdown_text)
     #print(markdown_text)
 
-openai.api_key = "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"
+load_dotenv()
+
+openai.api_key = os.getenv("API_KEY")
 
 prompt = "Can you make a markdown format lesson based on this source: " + markdown_text
 

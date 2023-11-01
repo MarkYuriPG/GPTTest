@@ -55,7 +55,7 @@ def scrapeWebHtml():
 
 
 #GPT
-# openai.api_key = "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"
+# openai.api_key = os.getenv.API_KEY
 
 
 # prompt = "Can you explain this: " + topic
