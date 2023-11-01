@@ -1,7 +1,6 @@
 import pdfplumber
 import aspose.words as aw
 import openai
-import markdown
 import re
 
 with pdfplumber.open('Design patterns Midterm Notes.pdf') as pdf:
@@ -33,9 +32,9 @@ with open("Output.md", "r", encoding="utf-8") as file:
     markdown_text = re.sub(watermark_text_end, '', markdown_text)
     #print(markdown_text)
 
-openai.api_key = "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"
+openai.api_key = "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"
 
-prompt = "Can you make a markdown format lesson focusing only about Creational Patterns based on this source: " + markdown_text
+prompt = "Can you make a markdown format lesson based on this source: " + markdown_text
 
 completion = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
@@ -45,4 +44,5 @@ completion = openai.ChatCompletion.create(
   ]
 )
 
+#completion['choices'][0]['message']['content'] - the reply of gpt
 print(completion['choices'][0]['message']['content'])
