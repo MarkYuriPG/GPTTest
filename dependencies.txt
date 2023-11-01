@@ -1,0 +1,4 @@
+openai
+aspose-words
+pdfplumber
+beautifulsoup4
