@@ -1,52 +1,68 @@
-import pdfplumber
-import aspose.words as aw
-import openai
-import re
+#import pdfplumber
+#import aspose.words as aw
+#import re
 from dotenv import load_dotenv
 import os
+import fitz  # PyMuPDF
+import openai
 
-with pdfplumber.open('Design patterns Midterm Notes.pdf') as pdf:
-    # iterate over each page
-    for page in pdf.pages:
-        # extract text
-        text = page.extract_text()
-        # print(text)
+# with pdfplumber.open('Design patterns Midterm Notes.pdf') as pdf:
+#     # iterate over each page
+#     for page in pdf.pages:
+#         # extract text
+#         text = page.extract_text()
+#         # print(text)
 
-fileName = "Design patterns Midterm Notes.pdf"
+#PyMuPDF
+fileName = "Test.pdf"
 
-output = aw.Document()
-output.remove_all_children()
+pdf_document = fitz.open(fileName)
 
-input = aw.Document(fileName)
-output.append_document(input, aw.ImportFormatMode.KEEP_SOURCE_FORMATTING)
+markdown_text = ""
 
-output.save("Output.md")
+for page_number in range(pdf_document.page_count):
+    page = pdf_document[page_number]
+    page_text = page.get_text()
+    markdown_text += page_text
 
-with open("Output.md", "r", encoding="utf-8") as file:
-    markdown_text = file.read()
+#print(markdown_text)
 
-    markdown_text = re.sub(r'!\[.*\]\(.*\)', '', markdown_text)
+#ASPOSE.WORDS
+# output = aw.Document()
+# output.remove_all_children()
 
-    watermark_text_start = r"\*\*Evaluation Only\. Created with Aspose\.Words\. Copyright 2003-2023 Aspose Pty Ltd\.\*\*"
-    markdown_text = re.sub(watermark_text_start, '', markdown_text)
+# input = aw.Document(fileName)
+# output.append_document(input, aw.ImportFormatMode.KEEP_SOURCE_FORMATTING)
 
-    watermark_text_end = r"\*\*Created with an evaluation copy of Aspose\.Words\. To discover the full versions of our APIs please visit: https://products\.aspose\.com/words/\*\*"
-    markdown_text = re.sub(watermark_text_end, '', markdown_text)
-    #print(markdown_text)
+# output.save("Output.md")
 
-load_dotenv()
+# with open("Output.md", "r", encoding="utf-8") as file:
+#     markdown_text = file.read()
 
-openai.api_key = os.getenv("API_KEY")
+#     markdown_text = re.sub(r'!\[.*\]\(.*\)', '', markdown_text)
 
-prompt = "Can you make a markdown format lesson based on this source: " + markdown_text
+#     watermark_text_start = r"\*\*Evaluation Only\. Created with Aspose\.Words\. Copyright 2003-2023 Aspose Pty Ltd\.\*\*"
+#     markdown_text = re.sub(watermark_text_start, '', markdown_text)
 
-completion = openai.ChatCompletion.create(
-  model="gpt-3.5-turbo",
-  messages=[
-    {"role": "system", "content": "You are a college teacher."},
-    {"role": "user", "content": prompt}
-  ]
-)
+#     watermark_text_end = r"\*\*Created with an evaluation copy of Aspose\.Words\. To discover the full versions of our APIs please visit: https://products\.aspose\.com/words/\*\*"
+#     markdown_text = re.sub(watermark_text_end, '', markdown_text)
+#     #print(markdown_text)
 
-#completion['choices'][0]['message']['content'] - the reply of gpt
-print(completion['choices'][0]['message']['content'])
+def generate_lesson(source:str):
+    load_dotenv()
+
+    openai.api_key = os.getenv("API_KEY")
+
+    prompt = "Can you make a markdown format lesson based on this source: " + markdown_text
+
+    completion = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "system", "content": "You are a college teacher."},
+        {"role": "user", "content": prompt}
+    ]
+    )
+
+    #REPLY of gpt
+    #completion['choices'][0]['message']['content']
+    print(completion['choices'][0]['message']['content'])
