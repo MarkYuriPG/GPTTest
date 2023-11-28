@@ -1,5 +1,5 @@
 openai
-aspose-words
-pdfplumber
 beautifulsoup4
 python-dotenv
+PyMuPDF
+pyo3

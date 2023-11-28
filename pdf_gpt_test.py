@@ -3,15 +3,9 @@
 #import re
 from dotenv import load_dotenv
 import os
-import fitz  # PyMuPDF
 import openai
+import fitz  # PyMuPDF
 
-# with pdfplumber.open('Design patterns Midterm Notes.pdf') as pdf:
-#     # iterate over each page
-#     for page in pdf.pages:
-#         # extract text
-#         text = page.extract_text()
-#         # print(text)
 
 #PyMuPDF
 fileName = "Test.pdf"
@@ -24,6 +18,28 @@ for page_number in range(pdf_document.page_count):
     page = pdf_document[page_number]
     page_text = page.get_text()
     markdown_text += page_text
+
+
+# def generate_lesson(source:str):
+#     load_dotenv()
+
+#     openai.api_key = os.getenv("API_KEY")
+
+#     prompt = "Can you make a markdown format lesson based on this source: " + source
+
+#     completion = openai.ChatCompletion.create(
+#     model="gpt-3.5-turbo",
+#     messages=[
+#         {"role": "system", "content": "You are a college teacher."},
+#         {"role": "user", "content": prompt}
+#     ]
+#     )
+
+#     #REPLY of gpt
+#     #completion['choices'][0]['message']['content']
+#     print(completion['choices'][0]['message']['content'])
+
+# generate_lesson(markdown_text)
 
 #print(markdown_text)
 
@@ -48,21 +64,10 @@ for page_number in range(pdf_document.page_count):
 #     markdown_text = re.sub(watermark_text_end, '', markdown_text)
 #     #print(markdown_text)
 
-def generate_lesson(source:str):
-    load_dotenv()
+# with pdfplumber.open('Design patterns Midterm Notes.pdf') as pdf:
+#     # iterate over each page
+#     for page in pdf.pages:
+#         # extract text
+#         text = page.extract_text()
+#         # print(text)
 
-    openai.api_key = os.getenv("API_KEY")
-
-    prompt = "Can you make a markdown format lesson based on this source: " + markdown_text
-
-    completion = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {"role": "system", "content": "You are a college teacher."},
-        {"role": "user", "content": prompt}
-    ]
-    )
-
-    #REPLY of gpt
-    #completion['choices'][0]['message']['content']
-    print(completion['choices'][0]['message']['content'])

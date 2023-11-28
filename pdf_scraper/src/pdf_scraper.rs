@@ -26,11 +26,12 @@ def scrape(src):
         "scraper",
     )?;
 
-    let lesson_source: String = scraper.getattr("scrape")?.call(("../Test.pdf",), None)?.extract()?;
+    let lesson_source: String = scraper
+    .getattr("scrape")?
+    .call(("../Test.pdf",), None)?
+    .extract()?;
     //println!("{}", lesson_source);
 
     Ok(lesson_source)
 })
 }
-
-

@@ -70,26 +70,56 @@
 
 mod ai;
 mod pdf_scraper;
+mod web_scraper;
+mod url_check;
+mod validate_url;
+use validate_url::validate_url;
+use url_check::check_url;
 use pdf_scraper::scrape_pdf;
 use ai::ai_generate_lesson;
+use web_scraper::scrape_url;
 
 //test
 fn main() {
-    if let Ok(lesson_source) = scrape_pdf() {
-        // Pass markdown_text to another function in a different module/file
-        // pdf_scraper::process_markdown(markdown_text);
-        //println!("{}", lesson_source);
-        if let Ok(generated_lesson) = ai_generate_lesson()
-        {
-            println!("{}", generated_lesson);
+    
+    if let Ok(lesson_source) = scrape_url() {
+        
+        if let Ok(protection) = check_url(&lesson_source){
+            if protection
+            {
+                println!("{}", lesson_source);
+            }   
+            else
+            {
+                println!("This website is protected!");
+            }
         }
-        else if let Err(error) = ai_generate_lesson(){
-            //println!("Failed to generate lesson!");
-            eprintln!("Failed to generate lesson: {}", error);
-        }
-    } else {
-        println!("Failed to scrape PDF");
     }
+    else if let Err(error) = scrape_url()
+    {
+        eprintln!("{}", error);
+    } 
+    else {
+        println!("Failed to scrape URL");
+    }
+
+
+    //PDF SCRAPER
+    // if let Ok(lesson_source) = scrape_pdf() {
+    //     // Pass markdown_text to another function in a different module/file
+    //     // pdf_scraper::process_markdown(markdown_text);
+    //     //println!("{}", lesson_source);
+    //     if let Ok(generated_lesson) = ai_generate_lesson()
+    //     {
+    //         println!("{}", generated_lesson);
+    //     }
+    //     else if let Err(error) = ai_generate_lesson(){
+    //         //println!("Failed to generate lesson!");
+    //         eprintln!("Failed to generate lesson: {}", error);
+    //     }
+    // } else {
+    //     println!("Failed to scrape PDF");
+    // }
     // match scrape_pdf() {
     //     Ok(lesson_source) => {
     //         // Handle the case where scraping is successful

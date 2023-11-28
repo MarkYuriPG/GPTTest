@@ -56,6 +56,3 @@ def generate_lesson(source):
     Ok(generated_lesson)
 })
 }
-
-
-
