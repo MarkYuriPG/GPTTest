@@ -3,3 +3,7 @@ beautifulsoup4
 python-dotenv
 PyMuPDF
 pyo3
+python-pptx
+python-docx
+pandas
+openpyxl
