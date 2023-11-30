@@ -73,35 +73,61 @@ mod pdf_scraper;
 mod web_scraper;
 mod url_check;
 mod validate_url;
-use validate_url::validate_url;
-use url_check::check_url;
-use pdf_scraper::scrape_pdf;
+mod scraper;
+use std::env;
+
+//use validate_url::validate_url;
+//use url_check::check_url;
+//use pdf_scraper::scrape_pdf;
 use ai::ai_generate_lesson;
-use web_scraper::scrape_url;
+use scraper::{
+    scrape_pdf,
+    scrape_txt,
+    scrape_docx,
+    scrape_pptx,
+    scrape_url,
+    scrape_xlsx,
+    scrape_csv
+};
+//use web_scraper::scrape_url;
 
 //test
 fn main() {
-    
-    if let Ok(lesson_source) = scrape_url() {
+    if let Ok(current_dir) = env::current_dir() {
+        println!("Current working directory: {:?}", current_dir);
+    } else {
+        eprintln!("Failed to get the current working directory");
+        return;
+    }
+
+    let pdf_result = scraper::scrape_pdf("..\\pdf_scraper\\Test.pdf".to_string());
+    match pdf_result {
+        Ok(result) => println!("PDF Scraped: {}", result),
+        Err(err) => eprintln!("Error scraping PDF: {}", err),
+    }
+}
+
+
+    // if let Ok(lesson_source) = scrape_url() {
         
-        if let Ok(protection) = check_url(&lesson_source){
-            if protection
-            {
-                println!("{}", lesson_source);
-            }   
-            else
-            {
-                println!("This website is protected!");
-            }
-        }
-    }
-    else if let Err(error) = scrape_url()
-    {
-        eprintln!("{}", error);
-    } 
-    else {
-        println!("Failed to scrape URL");
-    }
+    //     if let Ok(protection) = check_url(&lesson_source){
+    //         if protection
+    //         {
+    //             println!("{}", lesson_source);
+    //         }   
+    //         else
+    //         {
+    //             println!("This website is protected!");
+    //         }
+    //     }
+    // }
+    // else if let Err(error) = scrape_url()
+    // {
+    //     eprintln!("{}", error);
+    // } 
+    // else {
+    //     println!("Failed to scrape URL");
+    // }
 
 
     //PDF SCRAPER
@@ -130,4 +156,3 @@ fn main() {
     //         eprintln!("Failed to scrape PDF: {}", error);
     //     }
     //}
-}

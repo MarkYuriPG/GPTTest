@@ -4,7 +4,8 @@ use pyo3::{
     exceptions,
 };
 
-use crate::scrape_pdf;
+use crate::pdf_scraper::scrape_pdf;
+//use crate::scrape_pdf;
 
 pub fn ai_generate_lesson() -> PyResult<String> {
 Python::with_gil(|py| {
