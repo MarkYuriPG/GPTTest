@@ -1,0 +1,41 @@
+What is Data Privacy?
+Data privacy, sometimes also referred to as information privacy, is an area of data protection that concerns the proper handling of sensitive data including, notably, personal data[1] but also other confidential data, such as certain financial data and intellectual property data, to meet regulatory requirements as well as protecting the confidentiality and immutability of the data.
+
+Roughly speaking, data protection spans three broad categories, namely, traditional data protection (such as backup and restore copies), data security, and data privacy as shown in the Figure below. Ensuring the privacy of sensitive and personal data can be considered an outcome of best practice in data protection and security with the overall goal of achieving the continual availability and immutability of critical business data.
+
+Please note that the term data privacy contains what the European Union (EU) refers to as “data protection.”
+
+Data Protection Chart
+Figure: The Three Categories of Data Protection
+
+Security becomes an important element in protecting the data from external and internal threats but also when determining what digitally stored data can be shared and with whom. In a practical sense, data privacy deals with aspects of the control process around sharing data with third parties, how and where that data is stored, and the specific regulations that apply to those processes.
+
+Almost all countries in the world have introduced some form of legislation concerning data privacy in response to the needs of a particular industry or section of the population.
+
+Data Sovereignty
+Data sovereignty refers to digital data that is subject to the laws of the country in which it is located.
+
+The increasing adoption of cloud data services and a perceived lack of security has led many countries to introduce new legislation that requires data to be kept within the country in which the customer resides.
+
+Current concerns surrounding data sovereignty are related to governments trying to prevent data from being stored outside the geographic boundaries of the originating country. Ensuring that data exists only in the host country can be complex and often relies on the detail provided in the Service Level Agreement with the Cloud Service Provider.
+
+Data Privacy - Geographical variations in terms
+In the European Union, privacy is recognised as an absolute fundamental right and in some parts of the world privacy has often been regarded as an element of liberty, the right to be free from intrusions by the state. In most geographies, privacy is a legal concept and not a technology, and so it is the term data protection that deals with the technical framework of keeping the data secure and available.
+
+Why is Data Privacy important?
+The answer to this question comes down to business imperatives:
+
+Business Asset Management: Data is perhaps the most important asset a business owns. We live in a data economy where companies find enormous value in collecting, sharing and using data about customers or users, especially from social media. Transparency in how businesses request consent to keep personal data, abide by their privacy policies, and manage the data that they’ve collected, is vital to building trust with customers who naturally expect privacy as a human right.
+Regulatory Compliance: Managing data to ensure regulatory compliance is arguably even more important. A business may have to meet legal responsibilities about how they collect, store, and process personal data, and non-compliance could lead to a huge fine. If the business becomes the victim to a hack or ransomware, the consequences in terms of lost revenue and lost customer trust could be even worse.
+Data Privacy is not Data Security
+Businesses are sometimes confused by the terms and mistakenly believe that keeping personal and sensitive data secure from hackers means that they are automatically compliant with data privacy regulations. This is not the case. Data security protects data from compromise by external attackers and malicious insiders whereas data privacy governs how the data is collected, shared and used.
+
+Differing legal definitions of Data Privacy
+If there is agreement on the importance of data privacy to a business, then the legal definition can be extremely complex.
+
+None of the most prevalent regulations (GDPR, CCPA, HIPAA etc) define precisely what is meant by data privacy and it is left to businesses to determine what they consider best practice in their own industry. The legislation often refers to what is considered ‘reasonable’ which may differ between laws, along with the respective fines.
+
+In practice, this means that companies who work with sensitive and personal data should consider exceeding the legal parameters to ensure that their data practices are well above those outlined in the legislation.
+
+
+[1] Personal Data (known as Personally Identifiable Information or PII) means any information which can be used to distinguish or trace the identity of an individual (e.g., name, social security number, biometric records, etc.) alone, or when combined with other personal or identifying information which is linked or linkable to a specific individual (e.g., date and place of birth, mother’s maiden name, etc.).

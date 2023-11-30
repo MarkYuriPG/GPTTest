@@ -1,4 +1,5 @@
 import csv
+import fitz
 import pandas as pd
 from docx import Document
 from pptx import Presentation
@@ -7,14 +8,28 @@ from pptx import Presentation
 def scrape_txt(path: str):
     with open(path, 'r', encoding='utf-8') as file:
         text_data = file.read()
-    print(text_data)
+    return text_data
 
 def scrape_docx(path: str):
     doc = Document(path)
     text_data = ''
     for paragraph in doc.paragraphs:
         text_data += paragraph.text
-    print(text_data)
+    return text_data
+
+
+def scrape_pdf(path: str):
+    pdf_document = fitz.open(path)
+
+    text_data = ""
+
+    for page_number in range(pdf_document.page_count):
+        page = pdf_document[page_number]
+        page_text = page.get_text()
+        text_data += page_text
+
+    return text_data
+
 
 def scrape_pptx(path: str):
     ppt = Presentation(path)
@@ -24,7 +39,7 @@ def scrape_pptx(path: str):
         for shape in slide.shapes:
             if hasattr(shape, 'text'):
                 text_data += shape.text + '\n'
-    print(text_data)
+    return text_data
 
 def scrape_csv(path: str):
     text_data = ''
@@ -32,15 +47,16 @@ def scrape_csv(path: str):
         reader = csv.reader(csv_file)
         for row in reader:
             text_data += ','.join(row)
-    print(text_data)
+    return text_data
 
 def scrape_xlsx(path: str):
     df = pd.read_excel(path)
     text_data = df.to_string(index = False)
-    print(text_data)
+    return text_data
 
 #scrape_txt("data_privacy.txt")
 #scrape_docx("test.docx")
 #scrape_pptx("test.pptx")
 #scrape_csv("GroceryStoreDataSet.csv")
 #scrape_xlsx("test.xlsx")
+#print(scrape_txt("data_privacy.txt"))
