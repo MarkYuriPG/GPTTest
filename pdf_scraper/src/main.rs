@@ -100,10 +100,10 @@ fn main() {
         return;
     }
 
-    let pdf_result = scraper::scrape_pdf("..\\pdf_scraper\\Test.pdf".to_string());
-    match pdf_result {
-        Ok(result) => println!("PDF Scraped: {}", result),
-        Err(err) => eprintln!("Error scraping PDF: {}", err),
+    let text_result = scraper::scrape_xlsx("..\\pdf_scraper\\test.xlsx".to_string());
+    match text_result {
+        Ok(result) => println!("Text Scraped: {}", result),
+        Err(err) => eprintln!("Error scraping file or url: {}", err),
     }
 }
 
